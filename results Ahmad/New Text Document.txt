@@ -1,0 +1,66 @@
+1- total COUNT Numbers :
+SELECT (SELECT COUNT(*) FROM departments) AS total_departments, (SELECT COUNT(*) FROM dept_emp) AS total_dept_emp, (SELECT COUNT(*) FROM dept_manager) AS total_dept_manager, (SELECT COUNT(*) FROM employees) AS total_employees, (SELECT COUNT(*) FROM salaries) AS total_salaries, (SELECT COUNT(*) FROM titles) AS total_titles FROM dual ;
+
+taolt_adl_edpeapratmrtemnetnsts (9) , 
+tottoatladl_edpetp_et_memp (331603),
+taolt_adledpetpmt_amnaangaegrer (24),
+tottoatlael_memplopyloeyeeses (300024),
+ttoatla_sl_aslaalraierises (2844047),
+ttoatla_lt_itlietlses (443308).
+
+
+
+2- How many employees with the first name "Mark" do we have in our company?
+SELECT COUNT(first_name) FROM employees WHERE first_name= "Mark" ;
+(230)
+
+
+3- How many employees with the first name "Eric" and the last name beginning with "A" do we have in our company?
+SELECT COUNT(*)
+FROM employees
+WHERE first_name="Eric" AND last_name LIKE "A%" 
+(13)
+
+
+4-  How many employees do we have that are working for us since 1985 and who are they?
+SELECT first_name, last_name, hire_date FROM employees WHERE hire_date BETWEEN "1985-01-01" AND "1985-12-31" 
+(35316)
+
+
+5-  How many employees got hired from 1990 until 1997 and who are they?
+SELECT first_name, last_name, hire_date FROM employees WHERE hire_date BETWEEN "1990-01-01" AND "1997-12-31" ;
+(129545)
+
+
+
+
+6- How many employees have salaries higher than EUR 70 000,00 and who are they? 
+SELECT DISTINCT employees.emp_no, employees.first_name, employees.last_name
+FROM employees
+INNER JOIN salaries ON employees.emp_no = salaries.emp_no
+WHERE salaries.salary>70000
+(135631)
+
+
+
+7- How many employees do we have in the Research Department, who are working for us since 1992 and who are they?
+SELECT DISTINCT employees.emp_no, employees.first_name, employees.last_name, dept_emp.emp_no, dept_emp.dept_no
+FROM dept_emp 
+INNER JOIN employees ON dept_emp.emp_no = employees.emp_no
+INNER JOIN departments ON departments.dept_no= dept_emp.dept_no
+WHERE dept_emp.from_date BETWEEN "1992-01-01" AND "1992-12-31" AND dept_emp.to_date = "9999-01-01"
+(1318)
+
+
+
+
+8-  How many employees do we have in the Finance Department, who are working for us since 1985 until now and who have salaries higher than EUR 75 000,00 - who are they?
+SELECT DISTINCT employees.emp_no, employees.first_name, employees.last_name
+FROM dept_emp
+INNER JOIN salaries ON salaries.emp_no = dept_emp.emp_no 
+INNER JOIN departments ON departments.dept_no= dept_emp.dept_no
+INNER JOIN employees ON employees.emp_no = dept_emp.emp_no
+WHERE employees.hire_date BETWEEN "1985-01-01" AND "1985-12-31" AND dept_emp.to_date = "9999-01-01"
+AND departments.dept_name = "Finance"
+AND salaries.salary >75000
+(1061)

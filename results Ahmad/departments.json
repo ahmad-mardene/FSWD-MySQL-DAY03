@@ -1,0 +1,9 @@
+[
+{"type":"header","version":"4.8.0.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"employees"},
+{"type":"table","name":"departments","database":"employees","data":
+[
+{"total_departments":"9","total_dept_emp":"331603","total_dept_manager":"24","total_employees":"300024","total_salaries":"2844047","total_titles":"443308"}
+]
+}
+]
